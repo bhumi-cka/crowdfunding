@@ -30,17 +30,17 @@ contract crowdfunding
         uint length = funder_details.length;
         for(uint i=0; i<length; i++)
         {
-            if (block.timestamp < funder_details[i].date+172800000)
+            if (block.timestamp < funder_details[i].date+172800) //if the owner withdraws the funds within 2 days
             {
                 if (funder_details[i].store==true)
                 {
-                    payable(owner).transfer(funder_details[i].amount);
+                    payable(owner).transfer(funder_details[i].amount); //transferring the funds to the owner's account
                 }
                 else continue;
             }
             else
             {
-                payable(funder_details[i].add).transfer(funder_details[i].amount);
+                payable(funder_details[i].add).transfer(funder_details[i].amount); //if owner tries to withdraw after 2 days, the funds will be transferred to the funder's account
             }
         }
     }
